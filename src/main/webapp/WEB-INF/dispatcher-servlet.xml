@@ -18,16 +18,19 @@
 
     <!-- 开启注解模式驱动 -->
     <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="true">
+        <!---解决@ResponseBody返回中文字符串乱码问题-->
+        <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="supportedMediaTypes" value = "text/plain;charset=UTF-8" />
+                <constructor-arg value="UTF-8" />
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
     <!-- 扫包 -->
     <context:component-scan base-package="com.bcx.*"></context:component-scan>
-    <!-- 静态资源过滤 -->
-    <mvc:resources location="/resources/" mapping="/resources/**"/>
+    <!-- 静态资源过滤 跳过DispatcherServlet -->
+    <mvc:resources location="/img/" mapping="/img/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/" />

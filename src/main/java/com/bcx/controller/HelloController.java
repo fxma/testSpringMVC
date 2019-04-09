@@ -107,7 +107,7 @@ public class HelloController {
         return jsonObject.toJSONString();
     }
 
-    @RequestMapping(value="/jsonObj",produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="/jsonObj")
     @ResponseBody
     public Object jsonObj() {
         JSONObject jsonObject = new JSONObject();
